@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  plan_and_apply:
+  Plan-Apply:
     uses: ./.github/workflows/terraform_reusable.yml
     with:
       terraform_dir: ./terraform
