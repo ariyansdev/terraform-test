@@ -1,16 +1,28 @@
 resource_groups = {
-  "EastUS" = {
-    name = "rg-dev-eastus"
+  rg-dev = {
+    name     = "rg-dev-eastus"
+    location = "East US"
     tags = {
       environment = "dev"
       owner       = "dev-team"
-    } 
-  }, 
-  "CentralIndia" = {
-    name = "rg-test-centralindia"
+    }
+  }
+
+  rg-test = {
+    name     = "rg-test-centralindia"
+    location = "Central India"
     tags = {
       environment = "test"
       owner       = "qa-team"
-    } 
-  } 
+    }
+  }
+
+  rg-prod = {
+    name     = "rg-prod-westeurope"
+    location = "West Europe"
+    tags = {
+      environment = "prod"
+      owner       = "prod-team"
+    }
+  }
 }
