@@ -1,5 +1,3 @@
-name: Terraform Plan & Apply on Main
-
 on:
   push:
     branches:
@@ -10,7 +8,7 @@ permissions:
   contents: read
 
 jobs:
-  plan-apply:
+  plan_and_apply:
     uses: ./.github/workflows/terraform_reusable.yml
     with:
       terraform_dir: ./terraform
