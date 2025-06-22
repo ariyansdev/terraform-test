@@ -1,0 +1,18 @@
+name: Terraform Plan & Apply on Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  plan-apply:
+    uses: .github/workflows/terraform_reusable.yml@main
+    with:
+      terraform_dir: ./terraform
+      tfvars_file: terraform.tfvars
+      run_apply: true
+    secrets:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
