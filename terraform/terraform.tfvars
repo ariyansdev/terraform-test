@@ -7,13 +7,6 @@ resource_groups = {
     }
   }
 
-  "West Europe" = {
-    name = "rg-prod-westeurope"
-    tags = {
-      environment = "prod"
-      owner       = "prod-team"
-    }
-  }
 
   "Central India" = {
     name = "rg-test-centralindia"
