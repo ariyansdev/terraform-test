@@ -9,7 +9,7 @@ permissions:
 
 jobs:
   Plan-Apply:
-    uses: ./.github/workflows/terraform_reusable.yml
+    uses: ariyansdev/terraform-templates/.github/workflows/terraform_azure_template.yml@main
     with:
       terraform_dir: ./terraform
       tfvars_file: terraform.tfvars
