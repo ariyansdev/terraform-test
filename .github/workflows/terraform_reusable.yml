@@ -64,18 +64,25 @@ jobs:
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           ARM_USE_OIDC: true
-
-  stage:
-    name: Manual Approval (Stage)
-    if: ${{ github.ref == 'refs/heads/main' && inputs.run_apply }}
-    needs: plan
+  manual-approval:
     runs-on: ubuntu-latest
-    environment:
-      name: staging    # ← Requires manual approval if protected in GitHub UI
-      url: https://portal.azure.com
+    needs: plan
+    environment: manual-approval   # 👈 This triggers manual approval
     steps:
-      - name: Wait for approval
-        run: echo "Manual approval via 'staging' environment required"
+      - name: Awaiting manual approval
+        run: echo "Approval granted. Proceeding with apply..."
+
+  # stage:
+  #   name: Manual Approval (Stage)
+  #   if: ${{ github.ref == 'refs/heads/main' && inputs.run_apply }}
+  #   needs: plan
+  #   runs-on: ubuntu-latest
+  #   environment:
+  #     name: staging    # ← Requires manual approval if protected in GitHub UI
+  #     url: https://portal.azure.com
+  #   steps:
+  #     - name: Wait for approval
+  #       run: echo "Manual approval via 'staging' environment required"
 
   apply:
     name: Terraform Apply
