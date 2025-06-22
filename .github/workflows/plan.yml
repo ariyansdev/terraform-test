@@ -1,0 +1,16 @@
+name: Terraform Plan on PR
+
+on:
+  pull_request:
+
+jobs:
+  plan:
+    uses: .github/workflows/terraform_reusable.yml@main
+    with:
+      terraform_dir: ./terraform
+      tfvars_file: terraform.tfvars
+      run_apply: false
+    secrets:
+      ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+      ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+      ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
