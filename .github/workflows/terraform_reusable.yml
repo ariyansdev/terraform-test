@@ -65,11 +65,13 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           ARM_USE_OIDC: true
 
-      - name: Upload tfplan artifact
+      - name: Upload tfplan and lock file
         uses: actions/upload-artifact@v4
         with:
           name: tfplan
-          path: ${{ inputs.terraform_dir }}/tfplan
+          path: |
+            ${{ inputs.terraform_dir }}/tfplan
+            ${{ inputs.terraform_dir }}/.terraform.lock.hcl
 
   apply:
     name: Terraform Apply
@@ -93,11 +95,20 @@ jobs:
           tenant-id: ${{ secrets.ARM_TENANT_ID }}
           subscription-id: ${{ secrets.ARM_SUBSCRIPTION_ID }}
 
-      - name: Download tfplan artifact
+      - name: Download tfplan and lock file
         uses: actions/download-artifact@v4
         with:
           name: tfplan
           path: ${{ inputs.terraform_dir }}
+
+      - name: Terraform Init (lockfile)
+        working-directory: ${{ inputs.terraform_dir }}
+        run: terraform init -lockfile=readonly
+        env:
+          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
+          ARM_USE_OIDC: true
 
       - name: Terraform Apply
         working-directory: ${{ inputs.terraform_dir }}
