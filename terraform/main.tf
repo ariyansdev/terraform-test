@@ -3,6 +3,6 @@ module "resource_groups" {
   for_each = var.resource_groups
 
   name     = each.value.name
-  location = each.key
+  location = each.value.location
   tags     = each.value.tags
 }
