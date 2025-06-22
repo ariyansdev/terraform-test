@@ -1,4 +1,4 @@
-name: Terraform Plan & Apply
+name: Terraform Plan, Stage & Apply
 
 on:
   workflow_call:
@@ -27,9 +27,8 @@ permissions:
   contents: read
 
 jobs:
-  plan_only:
-    name: Terraform Plan (Only)
-    if: ${{ inputs.run_apply == false }}
+  plan:
+    name: Terraform Plan
     runs-on: ubuntu-latest
 
     steps:
@@ -66,9 +65,22 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
           ARM_USE_OIDC: true
 
-  plan_and_apply:
-    name: Terraform Plan & Apply
-    if: ${{ inputs.run_apply == true }}
+  stage:
+    name: Manual Approval (Stage)
+    if: ${{ github.ref == 'refs/heads/main' && inputs.run_apply }}
+    needs: plan
+    runs-on: ubuntu-latest
+    environment:
+      name: staging    # ← Requires manual approval if protected in GitHub UI
+      url: https://portal.azure.com
+    steps:
+      - name: Wait for approval
+        run: echo "Manual approval via 'staging' environment required"
+
+  apply:
+    name: Terraform Apply
+    if: ${{ github.ref == 'refs/heads/main' && inputs.run_apply }}
+    needs: stage
     runs-on: ubuntu-latest
 
     steps:
@@ -90,15 +102,6 @@ jobs:
       - name: Terraform Init
         working-directory: ${{ inputs.terraform_dir }}
         run: terraform init
-        env:
-          ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
-          ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
-          ARM_SUBSCRIPTION_ID: ${{ secrets.ARM_SUBSCRIPTION_ID }}
-          ARM_USE_OIDC: true
-
-      - name: Terraform Plan
-        working-directory: ${{ inputs.terraform_dir }}
-        run: terraform plan -var-file="${{ inputs.tfvars_file }}"
         env:
           ARM_CLIENT_ID: ${{ secrets.ARM_CLIENT_ID }}
           ARM_TENANT_ID: ${{ secrets.ARM_TENANT_ID }}
