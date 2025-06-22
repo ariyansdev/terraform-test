@@ -87,7 +87,8 @@ jobs:
   apply:
     name: Terraform Apply
     if: ${{ github.ref == 'refs/heads/main' && inputs.run_apply }}
-    needs: stage
+    #needs: stage
+    needs: manual-approval
     runs-on: ubuntu-latest
 
     steps:
