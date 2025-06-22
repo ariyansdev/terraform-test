@@ -1,2 +1,2 @@
-resource_group_name = "rg"
+resource_group_name = "create-new-rg"
 location            = "East US"
