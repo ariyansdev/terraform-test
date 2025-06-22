@@ -4,15 +4,13 @@ resource_groups = {
     tags = {
       environment = "dev"
       owner       = "dev-team"
-    }
-  }
-
-
+    } 
+  }, 
   "Central India" = {
     name = "rg-test-centralindia"
     tags = {
       environment = "test"
       owner       = "qa-team"
-    }
-  }
+    } 
+  } 
 }
