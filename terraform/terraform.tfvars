@@ -1,12 +1,12 @@
 resource_groups = {
-  "East US" = {
+  "EastUS" = {
     name = "rg-dev-eastus"
     tags = {
       environment = "dev"
       owner       = "dev-team"
     } 
   }, 
-  "Central India" = {
+  "CentralIndia" = {
     name = "rg-test-centralindia"
     tags = {
       environment = "test"
