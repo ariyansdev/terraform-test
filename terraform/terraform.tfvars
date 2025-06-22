@@ -1,2 +1,2 @@
-resource_group_name = "rg011-test111"
+resource_group_name = "rg"
 location            = "East US"
