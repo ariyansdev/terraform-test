@@ -7,7 +7,7 @@ on:
 
 jobs:
   plan-apply:
-    uses: .github/workflows/terraform_reusable.yml@main
+    uses: ./.github/workflows/terraform_reusable.yml
     with:
       terraform_dir: ./terraform
       tfvars_file: terraform.tfvars
