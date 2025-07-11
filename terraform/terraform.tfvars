@@ -27,7 +27,7 @@ resource_groups = {
   }
 
   rg-prods = {
-    name     = "rg-prod-westeurope-03"
+    name     = "rg-prod-westeurope-011"
     location = "West Europe"
     tags = {
       environment = "prod"
