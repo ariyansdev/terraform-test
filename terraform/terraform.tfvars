@@ -1,6 +1,6 @@
 resource_groups = {
   rg-dev = {
-    name     = "rg-dev-eastus"
+    name     = "rg-dev-eastus-01"
     location = "East US"
     tags = {
       environment = "dev"
@@ -9,7 +9,7 @@ resource_groups = {
   }
 
   rg-test = {
-    name     = "rg-test-centralindia"
+    name     = "rg-test-centralindia-01"
     location = "Central India"
     tags = {
       environment = "test"
@@ -18,7 +18,7 @@ resource_groups = {
   }
 
   rg-prod = {
-    name     = "rg-prod-westeurope"
+    name     = "rg-prod-westeurope-01"
     location = "West Europe"
     tags = {
       environment = "prod"
