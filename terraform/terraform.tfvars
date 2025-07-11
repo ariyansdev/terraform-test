@@ -25,4 +25,13 @@ resource_groups = {
       owner       = "prod-team"
     }
   }
+
+  rg-prods = {
+    name     = "rg-prod-westeurope-02"
+    location = "West Europe"
+    tags = {
+      environment = "prod"
+      owner       = "prod-team"
+    }
+  }
 }
